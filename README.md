@@ -35,7 +35,7 @@ Before you begin, ensure you have the following installed on your system:
    If you haven't cloned the repository yet, clone it using git:
 
    ```bash
-   git clone https://github.com/KamalMahanna/Ingredient-Safety-Analyzer
+   git clone -b localhost https://github.com/KamalMahanna/Ingredient-Safety-Analyzer
    ```
 
    Navigate to the project directory:
