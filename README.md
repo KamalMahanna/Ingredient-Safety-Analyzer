@@ -23,7 +23,7 @@ Before you begin, ensure you have the following installed on your system:
 
   ```bash
   node --version
-  
+
   # install pnpm
   npm install -g pnpm
   ```
@@ -35,7 +35,7 @@ Before you begin, ensure you have the following installed on your system:
    If you haven't cloned the repository yet, clone it using git:
 
    ```bash
-   git clone https://github.com/KamalMahanna/Ingredient-Safety-Analyzer
+   git clone -b localhost https://github.com/KamalMahanna/Ingredient-Safety-Analyzer
    ```
 
    Navigate to the project directory:
@@ -57,7 +57,6 @@ Before you begin, ensure you have the following installed on your system:
    # install python dependencies
    pip install -r requirements.txt
    ```
-
 
 ### Configuration
 
@@ -86,11 +85,12 @@ Before you begin, ensure you have the following installed on your system:
 To run the development servers:
 
 1. **Start the backend server:**
+
    ```bash
    gunicorn backend.app:app
    ```
-   The backend server will start running at `http://127.0.0.1:8000`.
 
+   The backend server will start running at `http://127.0.0.1:8000`.
 2. **Start the frontend server:**
 
    Open a new terminal, navigate to the `frontend` directory, install npm dependencies and start the frontend development server:
