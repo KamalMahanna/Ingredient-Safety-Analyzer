@@ -113,7 +113,7 @@ function App() {
         data = { image };
       }
       console.log("Base64 image data:", data.image); // Log base64 image data
-      const response = await fetch('https://ingredient-safety-analyzer.onrender.com', {
+      const response = await fetch('https://ingredient-safety-analyzer.onrender.com/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
