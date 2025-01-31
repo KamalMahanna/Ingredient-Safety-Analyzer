@@ -4,7 +4,7 @@ In a world where ingredient lists are longer than ever and understanding what yo
 
 This innovative tool, powered by the cutting-edge Gemini AI, is designed to bring clarity and confidence to your purchasing decisions. By simply uploading a product image or pasting an ingredient list, you unlock a detailed analysis revealing the reality behind each component.  We connect you with the truth, showing you how Gemini AI can dissect and decipher complex ingredient information, making healthy and safe choices easier than ever.
 
-Try out our hosted website here [Click Here](https://example.com)
+Try out our hosted website here [Click Here](https://ingredient-safety-analyzer.netlify.app/)
 
 ## Getting Started
 

@@ -1,11 +1,21 @@
-import React, { useState, useRef } from 'react';
-import { Camera, Upload, FileText, FlipHorizontal, RotateCcw, Loader2, ImagePlus } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Camera, Upload, FileText, FlipHorizontal, RotateCcw, Loader2, ImagePlus, Key } from 'lucide-react';
+import ApiKey from './components/ApiKey';
 import ReactMarkdown from 'react-markdown';
 
-type InputMode = 'text' | 'image' | 'camera';
+type InputMode = 'text' | 'image' | 'camera' | 'api';
 
 function App() {
   const [mode, setMode] = useState<InputMode>('text');
+  const [hasApiKey, setHasApiKey] = useState<boolean>(false);
+
+  useEffect(() => {
+    const savedKey = localStorage.getItem('gemini_api_key');
+    setHasApiKey(!!savedKey);
+    if (!savedKey) {
+      setMode('api');
+    }
+  }, []);
   const [text, setText] = useState('');
   const [image, setImage] = useState<string | null>(null);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
@@ -104,6 +114,12 @@ function App() {
   const handleAnalyze = async () => {
     setLoading(true);
     try {
+      const apiKey = localStorage.getItem('gemini_api_key');
+      if (!apiKey) {
+        setMode('api');
+        return;
+      }
+
       let data;
       if (mode === 'text') {
         data = { text };
@@ -112,16 +128,28 @@ function App() {
       } else {
         data = { image };
       }
-      console.log("Base64 image data:", data.image); // Log base64 image data
-      const response = await fetch('http://127.0.0.1:8000', {
+
+      const response = await fetch('https://ingredient-safety-analyzer.onrender.com/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-API-Key': apiKey
         },
         body: JSON.stringify(data),
       });
 
+      if (response.status === 401) {
+        // API key is invalid
+        localStorage.removeItem('gemini_api_key');
+        setHasApiKey(false);
+        setMode('api');
+        return;
+      }
+
       const result = await response.json();
+      if (result.error) {
+        throw new Error(result.error);
+      }
       setResult(result.message);
     } catch (error) {
       console.error('Analysis failed:', error);
@@ -186,10 +214,26 @@ function App() {
             <Camera size={20} />
             <span className="hidden sm:inline">Camera</span>
           </button>
+          <button
+            onClick={() => setMode('api')}
+            className={`inline-flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
+              mode === 'api' ? 'bg-cyan-500 text-white' : 'text-gray-400 hover:text-white'
+            }`}
+            title="API Settings"
+          >
+            <Key size={20} />
+            <span className="hidden sm:inline">API</span>
+          </button>
         </div>
 
-        <div className="bg-gray-800 p-6 rounded-lg shadow-xl">
-          <div className="space-y-6">
+        {mode === 'api' ? (
+          <ApiKey onClose={() => {
+            setHasApiKey(true);
+            setMode('text');
+          }} />
+        ) : (
+          <div className="bg-gray-800 p-6 rounded-lg shadow-xl">
+            <div className="space-y-6">
             {mode === 'text' && (
               <textarea
                 value={text}
@@ -295,7 +339,7 @@ function App() {
             <div className="flex justify-center">
               <button
                 onClick={handleAnalyze}
-                disabled={loading || 
+                disabled={!hasApiKey || loading || 
                   (mode === 'text' && !text) || 
                   (mode === 'image' && !image) ||
                   (mode === 'camera' && !capturedImage)
@@ -304,7 +348,9 @@ function App() {
                   disabled:opacity-50 disabled:cursor-not-allowed hover:from-cyan-600 hover:to-purple-600 
                   transition-all"
               >
-                {loading ? (
+                {!hasApiKey ? (
+                <span>API Key Required</span>
+              ) : loading ? (
                   <>
                     <Loader2 className="animate-spin mr-2" size={20} />
                     <span>Analyzing...</span>
@@ -314,8 +360,9 @@ function App() {
                 )}
               </button>
             </div>
+            </div>
           </div>
-        </div>
+        )}
 
         {result && (
           <div className="bg-gray-800 p-6 rounded-lg shadow-xl">

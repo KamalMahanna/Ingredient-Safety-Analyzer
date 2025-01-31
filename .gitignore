@@ -29,3 +29,6 @@ backend/dist
 backend/utils/gemini_ai/__pycache__
 backend/utils/tools/__pycache__
 .env
+
+# Local Netlify folder
+.netlify
