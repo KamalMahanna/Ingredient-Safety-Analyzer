@@ -29,7 +29,7 @@ export default function ApiKey({ onClose }: ApiKeyProps) {
     setError('');
     
     try {
-      const response = await fetch('http://127.0.0.1:8000/verify-key', {
+      const response = await fetch('https://ingredient-safety-analyzer.onrender.com/verify-key', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

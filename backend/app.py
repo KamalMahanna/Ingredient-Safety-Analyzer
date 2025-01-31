@@ -5,7 +5,7 @@ from .utils.tools import get_gemini_content, PromptsGenerator
 import os
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/*": {"origins": "https://ingredient-safety-analyzer.netlify.app"}})
 
 def verify_api_key(api_key):
     """Verify if the provided API key can be used to initialize Gemini"""
