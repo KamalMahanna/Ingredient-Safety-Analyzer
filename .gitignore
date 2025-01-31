@@ -25,7 +25,6 @@ dist-ssr
 frontend/node_modules
 backend/__pycache__
 backend/research
-backend/dist
 backend/utils/gemini_ai/__pycache__
 backend/utils/tools/__pycache__
 .env
