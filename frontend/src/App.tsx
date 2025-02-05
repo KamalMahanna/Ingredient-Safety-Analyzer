@@ -150,7 +150,13 @@ function App() {
       if (result.error) {
         throw new Error(result.error);
       }
-      setResult(result.message);
+      
+      // Process response to handle code blocks
+      const message = result.message;
+      const codeBlockMatch = message.match(/```([\s\S]*?)```/);
+      const processedMessage = codeBlockMatch ? codeBlockMatch[1].trim() : message;
+      
+      setResult(processedMessage);
     } catch (error) {
       console.error('Analysis failed:', error);
     } finally {

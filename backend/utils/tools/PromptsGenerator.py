@@ -30,7 +30,7 @@ class Generate:
             Add some comment if it is safe or unsafe
             """
         return prompt
-    
+
     @staticmethod
     def prompt_for_text(ingrdients: str) -> str:
         """
