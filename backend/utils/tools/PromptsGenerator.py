@@ -17,6 +17,7 @@ class Generate:
             Sort them by safe and unsafe, also how it is safe and if unsafe then why.
 
             Your output should be in following example format:
+
             ### Unsafe:
             - **Ingredient 1**    Health Benefits of ingredient 1
             - **Ingredient 2**    Health Benefits of ingredient 2
@@ -43,6 +44,7 @@ class Generate:
             Sort them by safe and unsafe, also how it is safe and if unsafe then why.
 
             Your output should be in following example format:
+            
             ### Unsafe:
             - **Ingredient 1**    Health Benefits of ingredient 1
             - **Ingredient 2**    Health Benefits of ingredient 2
