@@ -66,20 +66,7 @@ Before you begin, ensure you have the following installed on your system:
    * Go to the Google AI Studio website: [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
    * Create a project if you haven't already.
    * Generate an API key.
-2. **Configure Environment Variables:**
-
-   * Rename `.env.example` file to `.env`.
-
-     ```bash
-     mv .env.example .env
-     ```
-   * Open the `.env` file and add your Gemini API key:
-
-     ```
-     GEMINI_API_KEY=YOUR_API_KEY_HERE
-     ```
-
-     Replace `YOUR_API_KEY_HERE` with the API key you obtained.
+   
 
 ### Running the Application
 
@@ -106,4 +93,4 @@ To run the development servers:
 
 Once both servers are running, open your web browser and go to `http://localhost:5173` to access the Ingredient Safety Analyzer application.
 
-The frontend application will interact with the backend API to analyze ingredient safety using the Gemini AI API. Ensure your Gemini API key is correctly set in the backend `.env` file for the application to function properly.
+The frontend application will interact with the backend API to analyze ingredient safety using the Gemini AI API.
