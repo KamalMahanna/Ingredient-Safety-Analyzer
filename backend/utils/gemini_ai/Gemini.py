@@ -1,8 +1,11 @@
 import google.generativeai as genai
 
+
 # This file is used to get the response from the Gemini API.
 def get_gemini_response(
-    contents: list, api_key: str, model_name: str = "gemini-2.0-flash-thinking-exp-01-21"
+    contents: list,
+    api_key: str,
+    model_name: str = "gemini-2.0-flash-thinking-exp-01-21",
 ) -> str:
     """
     This function gets the response from the Gemini API.

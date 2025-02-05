@@ -129,7 +129,7 @@ function App() {
         data = { image };
       }
 
-      const response = await fetch('https://ingredient-safety-analyzer.onrender.com/', {
+      const response = await fetch('http://127.0.0.1:8000', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -150,7 +150,13 @@ function App() {
       if (result.error) {
         throw new Error(result.error);
       }
-      setResult(result.message);
+      
+      // Process response to handle code blocks
+      const message = result.message;
+      const codeBlockMatch = message.match(/```([\s\S]*?)```/);
+      const processedMessage = codeBlockMatch ? codeBlockMatch[1].trim() : message;
+      
+      setResult(processedMessage);
     } catch (error) {
       console.error('Analysis failed:', error);
     } finally {
